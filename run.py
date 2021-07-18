@@ -83,7 +83,12 @@ def auto_trade(driver,symbol,volume):
 
 def main():
     f_result = stock_data(path_string())
-    driver = webdriver.Chrome()
+    op = webdriver.ChromeOption()
+    op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    op.add_argument("--headless")
+    op.add_argument("--no-sandbox")
+    op.add_argument("--disabe-dev-sh-usage")
+    driver = webdriver.Chrome(excecutable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=op)
     try:
         auto_login(driver)
         print(f_result)
